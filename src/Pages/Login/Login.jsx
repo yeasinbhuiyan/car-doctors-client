@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 
 
@@ -23,13 +24,13 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="text" placeholder="email" className="input input-bordered" />
+                                <input  name='email' type="text" placeholder="email" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="text" placeholder="password" className="input input-bordered" />
+                                <input name='password' type="text" placeholder="password" className="input input-bordered" />
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>
@@ -38,6 +39,8 @@ const Login = () => {
                                 <input className="btn btn-warning" type="submit" value="Login" />
                             </div>
                         </form>
+                        <p className='font-semibold text-sm'>New To Car Doctors <Link className='text-bold text-orange-500' to='/signUp'>Sign Up</Link></p>
+                        {/* <p>Have an account? </p> */}
                     </div>
                 </div>
             </div>
