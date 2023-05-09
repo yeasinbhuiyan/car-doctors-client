@@ -13,7 +13,7 @@ const Services = () => {
     console.log(services);
     return (
         <div>
-            <div className='text-center'>
+            <div className='text-center space-y-5 mt-5'>
                 <h3 className='text-3xl text-orange-600'>Our Services</h3>
                 <h2 className='text-5xl'>Our Service Area  </h2>
                 <p>Lorem ipsum dolor sit amet conse  <br /> ctetur adipisicing elit. Maiores, eaque?</p>
