@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthProviders/AuthProvider';
+import SocialLogin from '../../Shared/SocialLogin';
 
 
 
 const Login = () => {
     const { loginUser } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
     const handleLogin = (event) => {
         event.preventDefault()
         const form = event.target
@@ -14,10 +17,36 @@ const Login = () => {
         const password = form.password.value
 
 
+        const from = location?.state?.from?.pathname || '/'
+
+
         loginUser(email, password)
             .then(result => {
                 const user = result.user
                 console.log(user)
+                navigate(from, { replace: true })
+
+
+
+                const loggedUser = {
+                    email: user.email
+                }
+
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        localStorage.setItem('car-access-token',data.token)
+                    })
+
+
+
             })
             .catch(error => {
                 console.log(error.message)
@@ -54,8 +83,9 @@ const Login = () => {
                                 <input className="btn btn-warning" type="submit" value="Login" />
                             </div>
                         </form>
-                        <p className='font-semibold text-sm'>New To Car Doctors <Link className='text-bold text-orange-500' to='/signUp'>Sign Up</Link></p>
+                        <p className='font-semibold text-sm'>New To Car Doctors <Link className='text-bold text-orange-500' to='/signUp' state={location.state}>Sign Up</Link></p>
                         {/* <p>Have an account? </p> */}
+                <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>

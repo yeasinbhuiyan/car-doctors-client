@@ -8,6 +8,7 @@ const NavigationBar = () => {
 
     const handleLogOut = () => {
         logOut()
+        localStorage.removeItem('car-access-token')
     }
 
 
