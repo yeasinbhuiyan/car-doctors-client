@@ -1,12 +1,34 @@
 import { Link } from "react-router-dom";
- import logo from '../assets/logo.svg'
+import logo from '../assets/logo.svg'
+import { useContext } from "react";
+import { AuthContext } from "../AuthProviders/AuthProvider";
 
 const NavigationBar = () => {
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+    }
+
+
     // eslint-disable-next-line no-unused-vars
     const navigationLink =
         <>
-            <li><Link className="me-7 font-semibold">Home</Link></li>
-            <li><Link className="font-semibold">About</Link></li>
+            <li><Link to='/' className="me-7 font-semibold">Home</Link></li>
+            <li><Link className="font-semibold me-7">About</Link></li>
+            {user ?  <>
+            <li>
+            <Link to='bookings' className="font-semibold me-7">Bookings</Link></li>
+            <li>
+                <button className="font-semibold" onClick={handleLogOut} >Logout</button>
+                </li></>
+            
+            
+            
+            : 
+             <li><Link to='/login' className="font-semibold">Login</Link></li> 
+                
+            }
 
 
         </>
