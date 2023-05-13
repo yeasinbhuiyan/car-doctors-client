@@ -10,7 +10,7 @@ const Bookings = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetch(`http://localhost:5000/bookings?email=${user.email}`, {
+        fetch(`https://cars-doctor-server-ten.vercel.app/bookings?email=${user.email}`, {
             method: 'GET',
             headers: {
                 authorization: `bearer ${localStorage.getItem('car-access-token')}`
@@ -34,7 +34,7 @@ const Bookings = () => {
     const handleDelete = (id) => {
         const proceed = confirm('Are You Sure Want to Delete')
         if (proceed) {
-            fetch(`http://localhost:5000/bookings/${id}`, {
+            fetch(`https://cars-doctor-server-ten.vercel.app/bookings/${id}`, {
                 method: 'DELETE'
 
             })
@@ -55,7 +55,7 @@ const Bookings = () => {
     }
 
     const handleConfirm = (id) => {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://cars-doctor-server-ten.vercel.app/bookings/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

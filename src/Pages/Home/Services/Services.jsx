@@ -5,12 +5,14 @@ import ServiceCard from "./ServiceCard";
 const Services = () => {
     // eslint-disable-next-line no-unused-vars
     const [services, setServices] = useState([])
+
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://cars-doctor-server-ten.vercel.app/services')
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])
-    console.log(services);
+
+    // console.log(services);
     return (
         <div className="my-10">
             <div className='text-center space-y-5 mt-5'>

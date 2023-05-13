@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password)
 
     }
-    const logOut=()=>{
+    const logOut = () => {
         setLoading(true)
         return signOut(auth)
     }
@@ -30,14 +30,38 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser)
             setLoading(false)
 
+            if (currentUser && currentUser.email) {
+
+                const loggedUser = {
+                    email: currentUser.email
+                }
+
+                fetch('https://cars-doctor-server-ten.vercel.app/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        localStorage.setItem('car-access-token', data.token)
+                    })
+
+            }
+            else {
+                localStorage.removeItem('car-access-token')
+            }
+
         })
         return () => { unsubscribe() }
 
     }, [])
 
 
-    const google =() =>{
-        return signInWithPopup(auth,googleProvider)
+    const google = () => {
+        return signInWithPopup(auth, googleProvider)
     }
 
 
